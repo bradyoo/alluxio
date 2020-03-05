@@ -30,6 +30,8 @@ import org.apache.parquet.hadoop.ParquetFileReader;
 import org.apache.parquet.hadoop.metadata.ParquetMetadata;
 import org.apache.parquet.hadoop.util.HadoopInputFile;
 import org.apache.parquet.io.InputFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -37,6 +39,7 @@ import java.io.IOException;
  * A reader for reading {@link ParquetRow}.
  */
 public final class ParquetReader implements TableReader {
+  private static final Logger LOG = LoggerFactory.getLogger(ParquetReader.class);
   private final org.apache.parquet.hadoop.ParquetReader<Record> mReader;
   private final ParquetSchema mSchema;
 
@@ -71,6 +74,7 @@ public final class ParquetReader implements TableReader {
     try (ParquetFileReader r = new ParquetFileReader(inputFile,
         ParquetReadOptions.builder().build())) {
       ParquetMetadata footer = r.getFooter();
+      LOG.info(footer.toString());
       schema = new AvroSchemaConverter().convert(footer.getFileMetaData().getSchema());
     }
 
