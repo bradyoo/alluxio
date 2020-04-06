@@ -74,25 +74,25 @@ public class InstrumentingFileSystem extends FileSystem {
 
   @Override
   public BlockLocation[] getFileBlockLocations(Path p, long start, long len) throws IOException {
-    LOG.info(String.format("getFileBlockLocations: %s %i %i", p.toString(), start, len)
+    LOG.info(String.format("getFileBlockLocations: %s %i %i", p.toString(), start, len));
     return super.getFileBlockLocations(p, start, len);
   }
 
   @Override
   public FSDataInputStream open(Path f) throws IOException {
-    LOG.info(String.format("open: %s", f.toString());
+    LOG.info(String.format("open: %s", f.toString()));
     return super.open(f);
   }
 
   @Override
   public FSDataOutputStream create(Path f) throws IOException {
-    LOG.info(String.format("create: %s", f.toString());
+    LOG.info(String.format("create: %s", f.toString()));
     return super.create(f);
   }
 
   @Override
   public boolean rename(Path path, Path path1) throws IOException {
-    LOG.info(String.format("rename: %s %s", path.toString(), path1.toString());
+    LOG.info(String.format("rename: %s %s", path.toString(), path1.toString()));
     return mFileSystem.rename(path, path1);
   }
 
