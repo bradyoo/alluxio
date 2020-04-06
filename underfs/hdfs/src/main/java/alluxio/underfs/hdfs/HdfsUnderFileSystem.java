@@ -165,8 +165,7 @@ public class HdfsUnderFileSystem extends ConsistentUnderFileSystem
           // loaded by the same class loader to avoid ServerConfigurationError
           Thread.currentThread().setContextClassLoader(currentClassLoader);
           final FileSystem fs = path.getFileSystem(hdfsConf);
-          LOG.info(fs.getClass().getName());
-          return fs;
+          return new InstrumentingFileSystem(fs);
         } finally {
           Thread.currentThread().setContextClassLoader(previousClassLoader);
         }
