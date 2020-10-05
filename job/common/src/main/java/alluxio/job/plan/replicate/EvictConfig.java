@@ -65,6 +65,7 @@ public final class EvictConfig implements PlanConfig {
     return NAME;
   }
 
+  
   @Override
   public Collection<String> affectedPaths() {
     if (StringUtils.isEmpty(mPath)) {
