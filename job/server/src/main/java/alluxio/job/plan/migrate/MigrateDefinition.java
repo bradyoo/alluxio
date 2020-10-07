@@ -108,7 +108,7 @@ public final class MigrateDefinition
     extends AbstractVoidPlanDefinition<MigrateConfig, ArrayList<MigrateCommand>> {
   private static final Logger LOG = LoggerFactory.getLogger(MigrateDefinition.class);
 
-  private static final int JOBS_PER_WORKER = 10;
+  private static final int JOBS_PER_WORKER = 60;
 
   private final Random mRandom = new Random();
 
