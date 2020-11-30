@@ -54,6 +54,17 @@ public final class DistributedLoadCommand extends AbstractDistributedJobCommand 
           .desc("Number of block replicas of each loaded file, default: " + DEFAULT_REPLICATION)
           .build();
 
+  private static final Option ACTIVE_JOBS_OPTION =
+      Option.builder()
+          .longOpt("active_jobs")
+          .required(false)
+          .hasArg(true)
+          .numberOfArgs(1)
+          .type(Number.class)
+          .argName("active_jobs")
+          .desc("Number of active_jobs")
+          .build();
+
   /**
    * Constructs a new instance to load a file or directory in Alluxio space.
    *
@@ -70,7 +81,8 @@ public final class DistributedLoadCommand extends AbstractDistributedJobCommand 
 
   @Override
   public Options getOptions() {
-    return new Options().addOption(REPLICATION_OPTION);
+    return new Options().addOption(REPLICATION_OPTION)
+        .addOption(ACTIVE_JOBS_OPTION);
   }
 
   @Override
@@ -83,6 +95,7 @@ public final class DistributedLoadCommand extends AbstractDistributedJobCommand 
     String[] args = cl.getArgs();
     AlluxioURI path = new AlluxioURI(args[0]);
     int replication = FileSystemShellUtils.getIntArg(cl, REPLICATION_OPTION, DEFAULT_REPLICATION);
+    mActiveJobs = FileSystemShellUtils.getIntArg(cl, ACTIVE_JOBS_OPTION, DEFAULT_ACTIVE_JOBS);
     distributedLoad(path, replication);
     return 0;
   }
